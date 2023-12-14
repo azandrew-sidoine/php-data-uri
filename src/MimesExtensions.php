@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the Drewlabs package.
+ * This file is part of the drewlabs namespace.
  *
  * (c) Sidoine Azandrew <azandrewdevelopper@gmail.com>
  *
@@ -20,7 +20,7 @@ class MimesExtensions
      *
      * @var array<array<string,string>>
      */
-    const VALUES = [
+    public const VALUES = [
         [
             'extension' => '.aac',
             'mime' => 'audio/aac',
@@ -374,11 +374,9 @@ class MimesExtensions
     }
 
     /**
-     * Call search callabck on the list passed as parameter
-     * 
-     * @param array $list 
-     * @param callable $callack 
-     * @return string|int|false 
+     * Call search callabck on the list passed as parameter.
+     *
+     * @return string|int|false
      */
     private static function search(array $list, callable $callack)
     {

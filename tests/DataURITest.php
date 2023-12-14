@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the Drewlabs package.
+ * This file is part of the drewlabs namespace.
  *
  * (c) Sidoine Azandrew <azandrewdevelopper@gmail.com>
  *
@@ -37,7 +37,7 @@ class DataURITest extends TestCase
     {
         $parser = new \Drewlabs\DataURI\Parser();
         $dataURIObject = $parser->parse($this->getMsWordData());
-        $this->assertEquals('application/vnd.openxmlformats-officedocument.wordprocessingml.document', $dataURIObject->getMimeType(), 'Expect created data object mimetype to equals application/vndopenxmlformats-officedocumentwordprocessingmldocument');
+        $this->assertSame('application/vnd.openxmlformats-officedocument.wordprocessingml.document', $dataURIObject->getMimeType(), 'Expect created data object mimetype to equals application/vndopenxmlformats-officedocumentwordprocessingmldocument');
     }
 
     /**
@@ -61,7 +61,7 @@ class DataURITest extends TestCase
     {
         $parser = new \Drewlabs\DataURI\Parser();
         $dataURIObject = $parser->parse($this->getMsWordData());
-        $this->assertEquals('docx', $dataURIObject->getExtension(), 'Expect data extension to be .docx encoded');
+        $this->assertSame('docx', $dataURIObject->getExtension(), 'Expect data extension to be .docx encoded');
     }
 
     /**

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the Drewlabs package.
+ * This file is part of the drewlabs namespace.
  *
  * (c) Sidoine Azandrew <azandrewdevelopper@gmail.com>
  *
@@ -21,10 +21,10 @@ class TooLongDataException extends \Exception
     private $length;
 
     /**
-     * Create Too Long Data Exception class
-     * 
-     * @param mixed $message 
-     * @param mixed $length 
+     * Create Too Long Data Exception class.
+     *
+     * @param mixed $message
+     * @param mixed $length
      */
     public function __construct($message, $length)
     {

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the Drewlabs package.
+ * This file is part of the drewlabs namespace.
  *
  * (c) Sidoine Azandrew <azandrewdevelopper@gmail.com>
  *
@@ -20,35 +20,35 @@ use Drewlabs\DataURI\Exceptions\TooLongDataException;
 class DataURI implements ContractsData
 {
     /**
-     * LITLEN limits
+     * LITLEN limits.
      */
-    const LITLEN = 0;
+    public const LITLEN = 0;
 
     /**
      * The ATTSPLEN (2100) limits the sum of all
      * lengths of all attribute value specifications which appear in a tag.
      */
-    const ATTSPLEN = 1;
+    public const ATTSPLEN = 1;
 
     /**
      * The TAGLEN (2100) limits the overall length of a tag.
      */
-    const TAGLEN = 2;
+    public const TAGLEN = 2;
 
     /**
      * ATTS_TAG_LIMIT is the length limit allowed for TAGLEN & ATTSPLEN DataURi.
      */
-    const ATTS_TAG_LIMIT = 2100;
+    public const ATTS_TAG_LIMIT = 2100;
 
     /**
      * LIT_LIMIT is the length limit allowed for LITLEN DataURi.
      */
-    const LIT_LIMIT = 1024;
+    public const LIT_LIMIT = 1024;
 
     /**
      * Extension indicating that the data URI is base64 encoded.
      */
-    const BASE_64 = 'base64';
+    public const BASE_64 = 'base64';
 
     /**
      * @var string
@@ -85,7 +85,7 @@ class DataURI implements ContractsData
      * @param string $mimeType   Mime type of media
      * @param array  $parameters Array of optional parameters
      * @param bool   $strict     Check length of data
-     * @param int    $mode Define Length of data
+     * @param int    $mode       Define Length of data
      */
     public function __construct(
         $data,
@@ -113,10 +113,10 @@ class DataURI implements ContractsData
                 $parameters .= sprintf(';%s=%s', $paramName, $paramValue);
             }
         }
-    
+
         // Build the base64 and data parts
         $base64 = $this->isBinary() ? sprintf(';%s', self::BASE_64) : '';
-        $data = $this->isBinary()?base64_encode($this->getContent()) : rawurlencode($this->getContent());
+        $data = $this->isBinary() ? base64_encode($this->getContent()) : rawurlencode($this->getContent());
 
         return sprintf(
             'data:%s%s%s,%s',
@@ -182,9 +182,9 @@ class DataURI implements ContractsData
     /**
      * Get a new instance of DataUri\Data from a file.
      *
-     * @param string $source     Path to the located file
-     * @param bool   $strict     Use strict mode
-     * @param int    $mode The length mode
+     * @param string $source Path to the located file
+     * @param bool   $strict Use strict mode
+     * @param int    $mode   The length mode
      *
      * @throws FileNotFoundException
      *
@@ -235,18 +235,19 @@ class DataURI implements ContractsData
             }
             $mimeType = curl_getinfo($curl, \CURLINFO_CONTENT_TYPE);
             curl_reset($curl);
+
             return new static($content, $mimeType, [], $strict, $lengthMode);
         } finally {
             // We close the curl handle is is resource and is set
-            if ((null !== $curl) && (is_resource($curl) || (class_exists(\CurlHandle::class) && $curl instanceof \CurlHandle))) {
+            if ((null !== $curl) && (\is_resource($curl) || (class_exists(\CurlHandle::class) && $curl instanceof \CurlHandle))) {
                 curl_close($curl);
             }
         }
     }
 
     /**
-     * @param int  $mode        Max allowed data length
-     * @param bool $strict      Check data length
+     * @param int  $mode   Max allowed data length
+     * @param bool $strict Check data length
      *
      * @throws TooLongDataException
      *
@@ -263,7 +264,7 @@ class DataURI implements ContractsData
             $this->mimeType = 'text/plain';
             $this->addParameters('charset', 'US-ASCII');
         }
-        $this->isBinary = 0 !== strpos($this->mimeType, 'text/');
+        $this->isBinary = !str_starts_with($this->mimeType, 'text/');
 
         return $this;
     }
@@ -271,8 +272,9 @@ class DataURI implements ContractsData
     private static function gessMimeType(\SplFileInfo $value)
     {
         if (method_exists($value, 'getMimeType')) {
-            return call_user_func([$value, 'getMimeType']);
+            return \call_user_func([$value, 'getMimeType']);
         }
+
         return MimesExtensions::getMimeType($value->getExtension());
     }
 

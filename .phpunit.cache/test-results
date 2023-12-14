@@ -1,0 +1,1 @@
+{"version":1,"defects":[],"times":{"DataURITest::testDataURIParserParse":0.002,"DataURITest::testDataMimeTypeMatches":0.001,"DataURITest::testDataIsBinaryMethodToBeTrue":0,"DataURITest::testGetExtensionMethod":0,"DataURITest::testNonDataURIBase64EncodedString":0.004,"MimesExtensionsTest::testExtensionFromMimeType":0.001,"MimesExtensionsTest::testMimeTypeFromExtension":0.001}}

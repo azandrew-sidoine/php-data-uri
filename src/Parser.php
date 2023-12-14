@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the Drewlabs package.
+ * This file is part of the drewlabs namespace.
  *
  * (c) Sidoine Azandrew <azandrewdevelopper@gmail.com>
  *
@@ -22,7 +22,7 @@ class Parser
      * offset #2 Parameters
      * offset #3 Datas
      */
-    const REGEXP = '/data:([a-zA-Z-\/+.]*)([a-zA-Z0-9-_;=.+]+)?,(.*)/';
+    public const REGEXP = '/data:([a-zA-Z-\/+.]*)([a-zA-Z0-9-_;=.+]+)?,(.*)/';
 
     /**
      * Parse a data URI and return a DataUri\Data.
@@ -56,7 +56,7 @@ class Parser
                 }
             }
         }
-        if (($base64 && !$rawData = base64_decode($rawData, $strict))) {
+        if ($base64 && !$rawData = base64_decode($rawData, $strict)) {
             throw new \InvalidArgumentException('base64 decoding failed');
         }
         if (!$base64) {
@@ -66,6 +66,7 @@ class Parser
         if ($base64) {
             $dataURI = $dataURI->asBinary();
         }
+
         return $dataURI->setExtension(MimesExtensions::getExtension($dataURI->getMimeType()));
     }
 }
