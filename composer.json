@@ -1,6 +1,6 @@
 {
     "name": "drewlabs/datauri",
-    "description": "Classes and utilities for parsing/working with data uri (base64) encoded objects",
+    "description": "Classes and utilities for parsing/working with url encoded objects",
     "type": "library",
     "license": "MIT",
     "autoload": {
